@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FeignCar {
     private String carId;
+
     private String carName;
 
     private String carModel;
@@ -18,6 +19,7 @@ public class FeignCar {
     private double carPrice;
 
     private int userRating;
+
     private String carColor;
 
 }

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +32,22 @@ public class FeignCarController {
     @GetMapping("/showAllCars")
     public List<FeignCar> viewAllCarsList() {
         logger.info("Port Number: " + env.getProperty("local.server.port"));
+        logger.info("Executing ViewAllCarsList Method");
         return oF.viewAllCars();
 
     }
 
+    @GetMapping("/sort-by-carmodels/{carModel}")
+    public List<FeignCar> getCarsByCarModel(@PathVariable("carModel") String carModel) {
+        logger.info("Port Number: " + env.getProperty("local.server.port"));
+        logger.info("Executing getCarsByCarModel Method");
+        return oF.getCarByModel(carModel);
+    }
+
+    @GetMapping("/sort-by-user-rating/{userRating}")
+    public List<FeignCar> getCarsByUserRating(@PathVariable("userRating") int userRating) throws InterruptedException {
+        logger.info("Port Number: " + env.getProperty("local.server.port"));
+        logger.info("Executing getCarsByUserRating Method ");
+        return oF.getCarbyUserRating(userRating);
+    }
 }
