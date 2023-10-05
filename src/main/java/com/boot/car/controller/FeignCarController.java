@@ -5,12 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/FeignCar")
@@ -50,4 +48,20 @@ public class FeignCarController {
         logger.info("Executing getCarsByUserRating Method ");
         return oF.getCarbyUserRating(userRating);
     }
+
+    @GetMapping("/sort-by-carId/{carId}")
+    public List<Map<String, Object>> findCarsByCarId(@PathVariable("carId") String carId){
+        logger.info("Port Number: "+env.getProperty("local.server.port"));
+        logger.info("Executing findCarsByCarId Method");
+        return oF.viewCarByCarId(carId);
+
+    }
+@GetMapping("/sort-by-color/{carColor}")
+    public List<FeignCar> findCarByColor(@PathVariable("carColor") String carColor) throws InterruptedException {
+        logger.info("Port Number: "+env.getProperty("local.server.port"));
+        logger.info("Executing findCarByColor Method ");
+        return oF.findCarsByColor(carColor);
+    }
+
+
 }
